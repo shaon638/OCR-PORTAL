@@ -1,0 +1,37 @@
+{% extends "dashboard_base.html" %}
+{% block dashboard %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 mt-2">
+            <h2 class="alert alert-primary">Dashboard &gt; My Forms ({{forms|length}})</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Form ID</th>
+                        <th>From Image</th>
+                        <th>Form Name</th>
+                        <th>User Name</th>
+                        <th>Form Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in forms %}
+                        <tr>
+                            <td>{{p.id}}</td>
+                            <td><img src="/media/{{p.form_image}}" style="height:300px;width:200px;"></td>
+                            <td>{{p.form_category}}</td>
+                            <td>{{p.user_name.first_name}} {{p.user_name.last_name}}</td>
+                            <td>
+                                <button class="btn btn-success" data-toggle="modal" data-target="#m{{p.id}}"><i class="fa fa-eye"></i> view</button>
+                                <a href="{}" class="btn btn-primary"><i class="fa fa-edit"></i> Next</a>
+                                <a href="{}" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</a>
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

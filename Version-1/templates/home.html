@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+
+<style>
+    h1 {
+        font-family: cursive;
+        color: rgb(48, 42, 42);
+    }
+
+    .bg {
+        height: 200px;
+        background: url("/static/images/background2.jpg");
+
+    }
+
+
+    .myimg {
+        height: 600px;
+        /* opacity: 1;  */
+    }
+
+    .box {
+        opacity: 0;
+    }
+
+    .box:hover {
+        height: 100%;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        text-shadow: 2px 2px 4px rgb(36, 29, 29);
+        opacity: 1;
+
+
+    }
+</style>
+{% endblock %}
+{% block myblock %}
+<div class="container-fluid">
+    <!-- <h1> HELLO THERE </h1> -->
+
+    <div class="row my-3">
+        <div class="col-md-12 text-center">
+            <h1> Our Categories({{category|length}})</h1>
+        </div>
+        {% for c in category %}
+        <div class="col-md-4 p-4  text-center ">
+            <div style="box-shadow:0px 0px 10px black; background:url('/media/{{c.cover_image}}'); background-size:100% 100%"
+                class="myimg">
+
+                <!-- <img src = "/media/{{c.cover_image}}">-->
+
+                <div class="box" style="height:600px">
+                    <h2>{{c.cat_name}}</h2>
+                    <!-- <p >{{c.description}}</p> -->
+                    <a href="{{c.cover_image.url}}" class="btn btn-dark" downalod>Download</a>
+                    <div class="my-5">
+
+                        <p>{{c.description}}</p>
+                    </div>
+
+
+                </div>
+
+
+                <!-- <a href = "media/media/{{c.cover_image}}" class = "btn btn-dark " download>Download</a> -->
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+{% if status %}
+    <script>
+        alert("{{status}}");
+        window.location = "/"
+    </script>
+{% endif %}
+{% endblock %}

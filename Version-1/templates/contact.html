@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load static %}
+{% block myblock %}
+<div class = "container-fluid">
+    <div class = "row">
+        <div class = "col-md-12 bg-dark text-center py-5 text-light ">
+            <h1> THIS IS CONTACT PAGE</h1>
+        </div>
+        <div class = "col-md-6 px-0 ">
+
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.3100112998673!2d78.34762511418833!3d17.44487000573803!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bce0a03f17ff82b%3A0x9d02e89b98deb496!2sIIIT-H%20%7C%20The%20International%20Institute%20of%20Information%20Technology%20-%20Hyderabad!5e0!3m2!1sen!2sin!4v1660323406956!5m2!1sen!2sin" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class = "col-md-6">
+            <form action =" " method ="post">
+                {% csrf_token %}
+                <div class = "form-group my-3" >
+                    <label>Your Name</label>
+                    <input type = "text" class = "form-control"name = "name" placeholder = "Enter name..." style = "width:600px;">
+
+                </div>
+                <div class = "form-group my-3">
+                    <label>Contact Number</label>
+                    <input type = "text" class = "form-control" name = "contact" placeholder = "Contact Number..."style = "width:600px;">
+
+                </div>
+                <div class = "form-group my-3">
+                    <label>Subject</label>
+                    <input type = "text" class = "form-control" name = "subject" placeholder = "Enter Form..."style = "width:600px;">
+
+                </div>
+                <div class = "form-group my-3">
+                    <label>Messages</label>
+                    <!-- <input type = "text" class = "form-control" placeholder = "Enter Form..."style = "width:450px;"> -->
+                    <textarea class = "form-control"  rows = "5" name = "message" style = "width:600px;"></textarea>
+                </div>
+                
+                <div class = "from-group my-3">
+                    <input type = "submit" class = "btn btn-success" value = "submit">
+                </div>
+
+
+
+            </form>
+
+        </div>
+    </div>
+    <div class = "row">
+        <div class = "col-md-12">
+            <h2 class = "text-center"> Previous Feedbacks</h2>
+            <h4 class = "text-center">Total : {{messages|length}}</h4>
+            <table class = "table table-bordered table-striped table-hover">
+                <thread>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Contac Number</th>
+                        <th>Subject</th>
+                        <th>Message</th>
+                        <th>Date</th>
+                    </tr>
+                </thread>
+                <tbody>
+                    {% for msg in messages %}
+                        <tr>
+                            <td>{{msg.id}}</td>
+                            <td>{{msg.name}}</td>
+                            <td>{{msg.contact_number}}</td>
+                            <td>{{msg.subject}}</td>
+                            <td>{{msg.message}}</td>
+                            <td>{{msg.added_on}}</td>
+
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% if status %}
+<script>
+
+    alert("{{status}}");
+</script>
+{% endif %}
+
+{% endblock %}
